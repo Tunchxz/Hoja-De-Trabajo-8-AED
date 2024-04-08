@@ -38,6 +38,23 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         swim(indexOfLastElem);
     }
 
+    @Override
+    public E remove(int i) {
+        if (isEmpty())
+            return null;
+        int indexOfLastElem = size() - 1;
+        E removed_data = heap.get(i);
+        swap(i, indexOfLastElem);
+        heap.remove(indexOfLastElem);
+        if (i == indexOfLastElem)
+            return removed_data;
+        E elem = heap.get(i);
+        sink(i);
+        if (heap.get(i).equals(elem))
+            swim(i);
+        return removed_data;
+    }
+
     private boolean less(int i, int j) {
         E node1 = heap.get(i);
         E node2 = heap.get(j);
@@ -75,21 +92,8 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         heap.set(j, elem_i);
     }
 
-    @Override
-    public E remove(int i) {
-        if (isEmpty())
-            return null;
-        int indexOfLastElem = size() - 1;
-        E removed_data = heap.get(i);
-        swap(i, indexOfLastElem);
-        heap.remove(indexOfLastElem);
-        if (i == indexOfLastElem)
-            return removed_data;
-        E elem = heap.get(i);
-        sink(i);
-        if (heap.get(i).equals(elem))
-            swim(i);
-        return removed_data;
+    public Vector<E> getHeap() {
+        return heap;
     }
 
     @Override
