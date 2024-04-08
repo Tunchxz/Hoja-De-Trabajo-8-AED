@@ -6,25 +6,30 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     private Vector<E> heap;
 
     public VectorHeap() {
-        heap = new Vector<>(1);
+        heap = new Vector<>();
     }
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    @Override
     public void clear() {
         heap.clear();
     }
 
+    @Override
     public int size() {
         return heap.size();
     }
 
+    @Override
     public E poll() {
         return remove(0);
     }
 
+    @Override
     public void add(E elem) {
         if (elem == null)
             throw new IllegalArgumentException();
@@ -70,6 +75,7 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         heap.set(j, elem_i);
     }
 
+    @Override
     public E remove(int i) {
         if (isEmpty())
             return null;
